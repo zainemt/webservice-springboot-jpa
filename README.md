@@ -26,6 +26,7 @@ As principais entidades incluem:
 - **Hibernate**
 - **H2 Database** (para testes locais)
 - **PostgreSQL** (banco de dados em produção)
+- **Postman**
 
 ## Modelo Lógico
 
