@@ -27,6 +27,7 @@ As principais entidades incluem:
 - **H2 Database** (para testes locais)
 - **PostgreSQL** (banco de dados em produção)
 - **Postman**
+- **Swagger**
 
 ## Modelo Lógico
 
@@ -110,6 +111,9 @@ Acesse o console do H2 em http://localhost:8080/h2-console e utilize as seguinte
 - **JDBC URL: jdbc:h2:mem:testdb**
 - **Usuário: sa**
 - **Senha: (campo vazio)**
+
+## Swagger
+Acesse o swagger em http://localhost:8080/swagger-ui.html
 
 ## Contribuições
 
