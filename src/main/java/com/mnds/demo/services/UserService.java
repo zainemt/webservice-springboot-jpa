@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mnds.demo.entities.User;
 import com.mnds.demo.repositories.UserRepository;
+import com.mnds.demo.services.exceptions.ResourceNotFoundException;
 
 @Service //registra a classe como componente do Spring, permitindo assim que ele realize a injeção de dependência implicita
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> user = repository.findById(id);
-		return user.get();
+		return user.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
 	public User insert(User user) {
