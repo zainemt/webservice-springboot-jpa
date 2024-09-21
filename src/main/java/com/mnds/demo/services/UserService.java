@@ -13,6 +13,8 @@ import com.mnds.demo.repositories.UserRepository;
 import com.mnds.demo.services.exceptions.DatabaseException;
 import com.mnds.demo.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service //registra a classe como componente do Spring, permitindo assim que ele realize a injeção de dependência implicita
 public class UserService {
 
@@ -46,9 +48,16 @@ public class UserService {
 	}
 	
 	public User update(Long id, User user) {
-		User entity = repository.getReferenceById(id); //instancia um objeto monitorado pelo jpa, sem ir no banco de dados
-		updateData(entity, user);
-		return repository.save(entity);
+		try {
+			User entity = repository.getReferenceById(id); //instancia um objeto monitorado pelo jpa, sem ir no banco de dados
+			updateData(entity, user);
+			return repository.save(entity);
+		}
+		catch (EntityNotFoundException e) {
+			e.printStackTrace();
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 
 	private void updateData(User entity, User user) {
