@@ -19,7 +19,7 @@ As principais entidades incluem:
 
 ## Tecnologias Utilizadas
 
-- **Java 17**
+- **Java 21**
 - **Spring Boot**
 - **Spring Data JPA**
 - **JPA**
