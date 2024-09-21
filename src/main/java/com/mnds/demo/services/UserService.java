@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.mnds.demo.entities.User;
 import com.mnds.demo.repositories.UserRepository;
+import com.mnds.demo.services.exceptions.DatabaseException;
 import com.mnds.demo.services.exceptions.ResourceNotFoundException;
 
 @Service //registra a classe como componente do Spring, permitindo assim que ele realize a injeção de dependência implicita
@@ -30,7 +33,16 @@ public class UserService {
 	}
 	
 	public void delete(Long id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		}
+		catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+		
 	}
 	
 	public User update(Long id, User user) {
